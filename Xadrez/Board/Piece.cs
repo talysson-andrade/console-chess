@@ -14,5 +14,7 @@
             this.moved = false;
             this.boardgame = boardgame;
         }
+
+        
     }
 }

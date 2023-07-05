@@ -12,5 +12,10 @@
             this.column = column;
             pieces = new Piece[row, column];
         }
+
+        public Piece GetPiece(int row, int column)
+        {
+            return pieces[row, column];
+        }
     }
 }
