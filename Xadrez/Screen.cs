@@ -7,9 +7,9 @@ namespace Xadrez
     {
         public static void PrintBoard(Board brd)
         {
-            for (int i = 0; i < brd.row; i++)
+            for (int i = 0; i < brd.rows; i++)
             {
-                for (int j = 0; j < brd.column; j++)
+                for (int j = 0; j < brd.columns; j++)
                 {
                     if (brd.GetPiece(i, j) == null)
                     {
