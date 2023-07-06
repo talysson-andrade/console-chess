@@ -17,5 +17,11 @@
         {
             return pieces[row, column];
         }
+
+        public void InsertPiece(Piece piece, Position pstn)
+        {
+            pieces[pstn.row, pstn.column] = piece;
+            piece.position = pstn;
+        }
     }
 }
