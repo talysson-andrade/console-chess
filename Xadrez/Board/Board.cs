@@ -54,5 +54,16 @@
             pieces[pstn.row, pstn.column] = piece;
             piece.position = pstn;
         }
+        public Piece RemovePiece(Position position)
+        {
+            if(GetPiece(position)== null)
+            {
+                return null;
+            }
+            Piece ast = GetPiece(position);
+            ast.position = null;
+            pieces[position.row, position.column] = null;
+            return ast;
+        }
     }
 }

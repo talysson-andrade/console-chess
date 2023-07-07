@@ -14,7 +14,10 @@
             this.moved = false;
             this.boardgame = boardgame;
         }
-
+        public void MovedPiece()
+        {
+            moved = true;
+        }
         
     }
 }
