@@ -13,12 +13,17 @@ namespace Xadrez
                 Board b = new Board(8, 8);
                 b.InsertPiece(new Pawn(b, Color.Black), new Position(1, 0));
                 b.InsertPiece(new Pawn(b, Color.Black), new Position(1, 1));
-                b.InsertPiece(new Pawn(b, Color.Black), new Position(1, 8));
+                b.InsertPiece(new Pawn(b, Color.Black), new Position(1, 7));
                 b.InsertPiece(new Queen(b, Color.Black), new Position(1, 3));
 
 
                 Screen.PrintBoard(b);
-            }catch(BoardException e)
+
+                ChessPosition chp = new ChessPosition('b', 6);
+                Console.WriteLine(chp);
+                Console.WriteLine(chp.ToPosition());
+            }
+            catch(BoardException e)
             {
                 Console.WriteLine(e.Message);
             }
