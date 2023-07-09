@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.Compression;
 using board;
 using chess;
 
@@ -19,6 +20,10 @@ namespace Xadrez
 
                     Console.Write("Piece: ");
                     Position origin = Screen.ReadMove().ToPosition();
+
+                    bool[,] movesIncator = match.brd.GetPiece(origin).PossibleMovements();
+                    Console.Clear();
+                    Screen.PrintBoard(match.brd, movesIncator);
 
                     Console.Write("To: ");
                     Position destination = Screen.ReadMove().ToPosition();
