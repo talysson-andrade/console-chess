@@ -6,16 +6,17 @@ namespace Xadrez
 {
     class Screen
     {
-        public static void PrintBoard(Board brd)
+
+        public static void PrintBoard(Match match)
         {
             Console.WriteLine();
             Console.WriteLine("   a b c d e f g h");
-            for (int i = 0; i < brd.rows; i++)
+            for (int i = 0; i < match.brd.rows; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < brd.columns; j++)
+                for (int j = 0; j < match.brd.columns; j++)
                 {
-                    PrintPiece(brd.GetPiece(i, j));
+                    PrintPiece(match.brd.GetPiece(i, j));
                     
                     if (j == 7)
                     {
@@ -26,18 +27,23 @@ namespace Xadrez
                 Console.WriteLine();
             }
             Console.WriteLine("   a b c d e f g h");
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + match.turn);
+            Console.WriteLine();
+            Console.WriteLine("{0} plays", match.player);
+            Console.WriteLine();
         }
 
-        public static void PrintBoard(Board brd, bool[,] movesIncator)
+        public static void PrintBoard(Match match, bool[,] movesIncator)
         {
             ConsoleColor originalColor = Console.BackgroundColor;
             ConsoleColor contrastColor = ConsoleColor.DarkGray;
             Console.WriteLine();
             Console.WriteLine("   a b c d e f g h");
-            for (int i = 0; i < brd.rows; i++)
+            for (int i = 0; i < match.brd.rows; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < brd.columns; j++)
+                for (int j = 0; j < match.brd.columns; j++)
                 {
                     if (movesIncator[i, j])
                     {
@@ -47,7 +53,7 @@ namespace Xadrez
                     {
                         Console.BackgroundColor = originalColor;
                     }
-                    PrintPiece(brd.GetPiece(i, j));
+                    PrintPiece(match.brd.GetPiece(i, j));
                     Console.BackgroundColor = originalColor;
 
                     if (j == 7)
@@ -59,6 +65,11 @@ namespace Xadrez
                 Console.WriteLine();
             }
             Console.WriteLine("   a b c d e f g h");
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + match.turn);
+            Console.WriteLine();
+            Console.WriteLine("{0} plays", match.player);
+            Console.WriteLine();
         }
         public static ChessPosition ReadMove()
         {

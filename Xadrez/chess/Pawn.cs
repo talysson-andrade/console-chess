@@ -13,11 +13,21 @@ namespace chess
             bool[,] mat = new bool[boardgame.rows, boardgame.columns];
             Position pos = new Position(0, 0);
 
-            //up
+            //up - white
             pos.DefineValue(position.row - 1, position.column);
             if (boardgame.ValidPosition(pos) && CanMoveTo(pos))
             {
                 mat[pos.row, pos.column] = true;
+            }
+
+            //down - black
+            if (color == Color.Black)
+            {
+                pos.DefineValue(position.row + 1, position.column);
+                if (boardgame.ValidPosition(pos) && CanMoveTo(pos))
+                {
+                    mat[pos.row, pos.column] = true;
+                }
             }
             return mat;
         }

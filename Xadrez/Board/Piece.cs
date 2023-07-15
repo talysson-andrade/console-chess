@@ -26,6 +26,22 @@
         }
 
         public abstract bool[,] PossibleMovements();
+
+        public bool ExistPossibleMoves()
+        {
+            bool[,] mat = PossibleMovements();
+            for(int i = 0; i < boardgame.rows; i++)
+            {
+                for(int j = 0;j< boardgame.columns; j++)
+                {
+                    if (mat[i, j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         
     }
 }

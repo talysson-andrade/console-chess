@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO.Compression;
-using board;
+﻿using board;
 using chess;
 
 namespace Xadrez
@@ -16,19 +14,10 @@ namespace Xadrez
                 while (!match.end)
                 {
                     Console.Clear();
-                    Screen.PrintBoard(match.brd);
+                    Screen.PrintBoard(match);
 
-                    Console.Write("Piece: ");
-                    Position origin = Screen.ReadMove().ToPosition();
+                    match.TurnPlay();
 
-                    bool[,] movesIncator = match.brd.GetPiece(origin).PossibleMovements();
-                    Console.Clear();
-                    Screen.PrintBoard(match.brd, movesIncator);
-
-                    Console.Write("To: ");
-                    Position destination = Screen.ReadMove().ToPosition();
-
-                    match.Move(origin, destination);
                 }
             }
             catch(BoardException e)

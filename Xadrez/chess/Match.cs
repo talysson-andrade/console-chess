@@ -1,16 +1,19 @@
 ﻿using board;
+using System.Text.RegularExpressions;
+using Xadrez;
+
 namespace chess
 {
     class Match
     {
         public Board brd { get; private set; }
-        private int turn;
-        private Color player;
+        public int turn { get; private set; }
+        public Color player { get; private set; }
         public bool end { get; private set; }
 
         public Match()
         {
-            this.brd = new Board(8,8);
+            this.brd = new Board(8, 8);
             PlacePieces();
             this.turn = 1;
             this.player = Color.White;
@@ -62,8 +65,75 @@ namespace chess
             piece.MovedPiece();
             Piece capturedPiece = brd.RemovePiece(destination);
             brd.InsertPiece(piece, destination);
-            
+
         }
 
+        public void TurnPlay()
+        {
+            try
+            {
+                PlayerTurn(Color.White);
+                PlayerTurn(Color.Black);
+                turn++;
+              
+            }
+            catch (BoardException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
+            }
+            
+
+        }
+        public void PlayerTurn(Color color)
+        {
+
+            player = color;
+            Console.Clear();
+            Screen.PrintBoard(this);
+
+            Console.Write("Piece: ");
+            Position origin = Screen.ReadMove().ToPosition();
+            OriginPositionIsValid(origin);
+
+            bool[,] movesIncator = brd.GetPiece(origin).PossibleMovements();
+            Console.Clear();
+            Screen.PrintBoard(this, movesIncator);
+
+            Console.Write("To: ");
+            Position destination = Screen.ReadMove().ToPosition();
+            DestinationPositionIsValid(destination,origin);
+
+            Move(origin, destination);
+
+            Console.Clear();
+            Screen.PrintBoard(this);
+
+
+
+        }
+
+        public void OriginPositionIsValid(Position origin)
+        {
+            if (brd.GetPiece(origin) == null)
+            {
+                throw new BoardException("There are no pieces in this position");
+            }
+            if (player != brd.GetPiece(origin).color)
+            {
+                throw new BoardException("Is not your turn");
+            }
+            if (!brd.GetPiece(origin).ExistPossibleMoves())
+            {
+                throw new BoardException("This piece does'nt have any possible moves");
+            }
+        }
+        public void DestinationPositionIsValid(Position destination, Position origin)
+        {
+            if (!brd.GetPiece(origin).PossibleMovements()[destination.row, destination.column])
+            {
+                throw new BoardException("This piece cannot go to that position");
+            }
+        }
     }
 }
