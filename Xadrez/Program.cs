@@ -17,7 +17,6 @@ namespace Xadrez
                     Screen.PrintBoard(match);
 
                     match.TurnPlay();
-
                 }
             }
             catch(BoardException e)

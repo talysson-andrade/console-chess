@@ -10,6 +10,7 @@ namespace chess
         public int turn { get; private set; }
         public Color player { get; private set; }
         public bool end { get; private set; }
+        public HashSet<Piece> capturedPieces { get; private set; }
 
         public Match()
         {
@@ -17,6 +18,7 @@ namespace chess
             PlacePieces();
             this.turn = 1;
             this.player = Color.White;
+            capturedPieces = new HashSet<Piece>();
             end = false;
 
         }
@@ -65,24 +67,32 @@ namespace chess
             piece.MovedPiece();
             Piece capturedPiece = brd.RemovePiece(destination);
             brd.InsertPiece(piece, destination);
+            if(capturedPiece != null)
+            {
+                capturedPieces.Add(capturedPiece);
+            }
 
         }
 
         public void TurnPlay()
         {
+
+
             try
             {
+
                 PlayerTurn(Color.White);
+
                 PlayerTurn(Color.Black);
                 turn++;
-              
+
             }
             catch (BoardException e)
             {
                 Console.WriteLine(e.Message);
                 Console.ReadLine();
             }
-            
+
 
         }
         public void PlayerTurn(Color color)
@@ -102,13 +112,12 @@ namespace chess
 
             Console.Write("To: ");
             Position destination = Screen.ReadMove().ToPosition();
-            DestinationPositionIsValid(destination,origin);
+            DestinationPositionIsValid(destination, origin);
 
             Move(origin, destination);
 
             Console.Clear();
             Screen.PrintBoard(this);
-
 
 
         }

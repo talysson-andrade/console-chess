@@ -28,6 +28,8 @@ namespace Xadrez
             }
             Console.WriteLine("   a b c d e f g h");
             Console.WriteLine();
+            PrintCapturedPieces(match);
+            Console.WriteLine();
             Console.WriteLine("Turn: " + match.turn);
             Console.WriteLine();
             Console.WriteLine("{0} plays", match.player);
@@ -65,6 +67,8 @@ namespace Xadrez
                 Console.WriteLine();
             }
             Console.WriteLine("   a b c d e f g h");
+            Console.WriteLine();
+            PrintCapturedPieces(match);
             Console.WriteLine();
             Console.WriteLine("Turn: " + match.turn);
             Console.WriteLine();
@@ -104,6 +108,25 @@ namespace Xadrez
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write(piece);
                     Console.ForegroundColor = ccolor;
+                }
+            }
+        }
+
+        public static void PrintCapturedPieces(Match match)
+        {
+            foreach(Piece piece in match.capturedPieces)
+            {
+                if(piece.color == Color.White)
+                {
+                    Console.Write(piece+" ");
+                    Console.WriteLine();
+                }
+                if(piece.color == Color.Black)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write(piece + " ");
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
             }
         }
